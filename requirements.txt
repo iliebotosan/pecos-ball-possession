@@ -1,0 +1,4 @@
+# Python 3.14 (tested with 3.14.0). Also needs ffmpeg on the PATH (tested with 8.1): the pipeline reads the match audio.
+numpy==2.4.2
+pandas==3.0.0
+scipy==1.17.0
