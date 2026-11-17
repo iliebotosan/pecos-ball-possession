@@ -123,6 +123,10 @@ public ground truth. The only learned component in the submission is the whistle
 events that the pipeline itself locates in this match's tracking and tags. The COCO-pre-trained detector appears only
 in a dropped experiment.
 
+**Use of an LLM.** We used Claude (Anthropic) as a coding assistant. The match data stayed on our machine: the
+assistant wrote code that ran locally and was shown only aggregate scores and counts, never data rows, video frames
+or audio. No LLM is part of the pipeline.
+
 ## 5. Possession rules we implemented
 
 - **Who has it:** the team of the player nearest the ball, by majority vote over ±2 s. A switch needs the new team to win the
