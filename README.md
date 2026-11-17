@@ -55,8 +55,8 @@ tracking ──> 1. vote ──> 2. smooth & carry ──> 3. dead ball ──> 
 ```
 
 1. **Vote** (`analysis/versions.py`, `analysis/v9.py`): each frame, the team of the player nearest the ball; no vote
-   while the ball is in flight or contested.
-2. **Smooth and carry**: a 2-second majority vote; when the ball is lost in live play, the last team keeps it.
+   while the ball is in flight (free of players and moving fast).
+2. **Smooth and carry**: a majority vote over ±2 s (the organisers' own `smooth`, ±50 frames); when the ball is lost in live play, the last team keeps it.
 3. **Dead ball**: outfield players slow down, the ball leaves the pitch, a set-piece tag is about to start
    (`analysis/features.py`, `analysis/versions.py`), and the **referee's whistle** detected in the audio
    (`analysis/whistle.py`): candidates in the 3.5–4.6 kHz band are matched to a signature learned from blows that
@@ -68,6 +68,9 @@ tracking ──> 1. vote ──> 2. smooth & carry ──> 3. dead ball ──> 
    start whistle and confirmed by a set-piece restart; long passes inside a LONG BALL tag stay with the kicking team
    through the flight; when the ball disappears with one team and reappears with the other in live play, the switch
    goes to the middle of the blackout.
+
+**[pecos_pipeline.ipynb](pecos_pipeline.ipynb)** walks through every step above in order, one titled section per idea,
+with its effect on the public check and on the full match, and ends by writing the same submission file.
 
 The entry point is `analysis/best.py`: `final(Bundle.load())` returns the labels. Module docstrings mention
 research notebooks that are not part of this repository; everything needed to rebuild the submission is here.
@@ -83,7 +86,8 @@ research notebooks that are not part of this repository; everything needed to re
 ## Layout
 
 ```
-analysis/        our pipeline (entry point: best.py)
+pecos_pipeline.ipynb  the pipeline step by step, ending with the submission file
+analysis/        our pipeline (entry point: best.py; check.py scores a prediction on the public window)
 scripts/         make_submission.py: data in, validated submission out
 docs/            the technical document
 games.py, starter/, evaluation/, data/README.md
